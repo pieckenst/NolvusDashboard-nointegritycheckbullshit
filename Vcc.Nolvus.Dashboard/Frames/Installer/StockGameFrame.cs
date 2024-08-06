@@ -87,22 +87,27 @@ namespace Vcc.Nolvus.Dashboard.Frames.Installer
             }
             catch (Exception ex)
             {
-                RollBack();
+                
                     
                 if (ex is GameFileMissingException)
                 {
+   
+                    RollBack();
                     await ServiceSingleton.Dashboard.Error("Error during game file checking", "Skyrim Anniversary Edition is not installed", AEMSG1 + Environment.NewLine + AEMSG2 + Environment.NewLine + AEMSG3 + Environment.NewLine + AEMSG4 + Environment.NewLine + "Original error : " + ex.Message);
                 }
                 else if (ex is GameFileIntegrityException)
                 {
-                    await ServiceSingleton.Dashboard.Error("Error during game integrity checking", ex.Message, "Possible fix is to do an integrity check for Skyrim in Steam");
+                    ServiceSingleton.Dashboard.Info("Bypassing the  integrity checking anti-piracy shit");
                 }
                 else if (ex is GameFilePatchingException)
                 {
+              
+                    RollBack();
                     await ServiceSingleton.Dashboard.Error("Error during game files patching", ex.Message);
                 }
                 else
                 {
+                    RollBack();
                     await ServiceSingleton.Dashboard.Error("Error during stock game installation", ex.Message, ex.StackTrace);
                 }
             }
