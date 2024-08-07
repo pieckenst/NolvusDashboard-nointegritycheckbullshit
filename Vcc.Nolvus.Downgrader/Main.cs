@@ -120,13 +120,17 @@ namespace Vcc.Nolvus.Downgrader
                 }
                 catch (Exception ex)
                 {                    
-                    RollBack();                    
+                                        
 
                     var Error = string.Empty;
 
                     if (ex is GameFileMissingException)
-                    {                        
+                    {
+                        RollBack();
                         Error = "Error during game file checking, Skyrim Anniversary Edition is not installed (" + ex.Message + ")";
+                        AddItemToList(Error);
+
+                        Status(Error, true);
                     }
                     else if (ex is GameFileIntegrityException)
                     {
@@ -134,16 +138,22 @@ namespace Vcc.Nolvus.Downgrader
                     }
                     else if (ex is GameFilePatchingException)
                     {
+                        RollBack();
                         Error = "Error during game files patching (" + ex.Message + ")";
+                        AddItemToList(Error);
+
+                        Status(Error, true);
                     }
                     else
                     {
+                        RollBack();
                         Error = "Error during stock game creation with message : " + ex.Message;
+                        AddItemToList(Error);
+
+                        Status(Error, true);
                     }
 
-                    AddItemToList(Error);
-
-                    Status(Error, true);
+                    
                 }
             });            
         }
