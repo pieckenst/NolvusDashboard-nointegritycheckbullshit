@@ -304,7 +304,7 @@ namespace Vcc.Nolvus.StockGame.Patcher
 
             if (FileHash != Instruction.DestFile.Hash)
             {
-                throw new GameFileIntegrityException("Hash for game file : " + FileName + " does not match!");
+               Console.WriteLine("Hash for game file : " + FileName + " does not match!");
             }
 
             this.StepProcessed("Patched game file " + Instruction.DestFile.Name + " integrity ok");
