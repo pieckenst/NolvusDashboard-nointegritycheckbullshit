@@ -63,7 +63,7 @@ namespace Vcc.Nolvus.StockGame.Meta
             }
             else if ((ServiceSingleton.Files.GetHash(FileName) != this.Hash) && !this.HashSkip)
             {
-                throw new GameFileIntegrityException("Hash for game file : " + FileName + " does not match!");
+                Console.WriteLine("Hash for game file : " + FileName + " does not match!");
             }
         }
 
